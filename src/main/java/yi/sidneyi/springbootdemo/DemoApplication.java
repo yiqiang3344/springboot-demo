@@ -2,14 +2,20 @@ package yi.sidneyi.springbootdemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.ApplicationListener;
 
-@Configuration
+import java.util.Set;
+
 @EnableAutoConfiguration
-@ComponentScan
 public class DemoApplication {
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication app = new SpringApplication(DemoApplication.class);
+
+        Set<ApplicationListener<?>> ls = app.getListeners();
+
+        ApplicationStartedEventListener asel = new ApplicationStartedEventListener();
+
+        app.addListeners(asel);
+        app.run(args);
     }
 }

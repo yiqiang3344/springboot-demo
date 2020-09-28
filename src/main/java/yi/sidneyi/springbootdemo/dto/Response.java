@@ -1,15 +1,17 @@
 package yi.sidneyi.springbootdemo.dto;
 
-import com.alibaba.fastjson.JSONPObject;
+import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Data
 @AllArgsConstructor
 @Accessors(chain = true)
 public class Response {
-    private Integer code;
+    private int code;
     private String message;
 
     public Response() {
@@ -26,10 +28,15 @@ public class Response {
         return this;
     }
 
-    public Response initEmptyRes(Integer code, String message) {
-        this.code = code;
-        this.message = message;
-        this.data = new JSONPObject();
-        return this;
+    public JSONObject buildErrorResult(int code, String message, int httpstatus, HttpServletResponse response){
+        response.setStatus(httpstatus);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.fluentPut("code", code)
+                .fluentPut("message", message);
+        if (200 == httpstatus) {
+            return jsonObject.fluentPut("data", new JSONObject());
+        }
+        return jsonObject;
+
     }
 }

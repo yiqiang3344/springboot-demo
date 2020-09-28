@@ -46,6 +46,7 @@ public class TestController {
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     @ResponseBody
     public Response test1(@Validated Request request) {
+        log.info(request.getTest());
         JSONObject data = new JSONObject();
         data.put("test", request.getTest());
         return new Response().initSuccessRes(data);
