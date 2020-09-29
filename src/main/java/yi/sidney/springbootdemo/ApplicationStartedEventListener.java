@@ -1,6 +1,5 @@
-package yi.sidneyi.springbootdemo;
+package yi.sidney.springbootdemo;
 
-import org.apache.logging.log4j.LogManager;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEvent;
 import org.springframework.boot.context.event.ApplicationFailedEvent;
@@ -33,9 +32,9 @@ public class ApplicationStartedEventListener implements GenericApplicationListen
                 return;
             }
             //设置log4j2的日志路径，但会在根目录留下一个多余的目录`${sys:logPath}`
-            if (env.containsProperty("logging.path")) {
+            if (env.containsProperty("logging.file.path")) {
                 StringBuilder logPath = new StringBuilder();
-                logPath.append(env.getProperty("logging.path"));
+                logPath.append(env.getProperty("logging.file.path"));
                 if (env.containsProperty("spring.application.name")) {
                     logPath
                             .append("/")

@@ -1,9 +1,9 @@
-package yi.sidneyi.springbootdemo.dao;
+package yi.sidney.springbootdemo.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import yi.sidneyi.springbootdemo.entity.User;
+import yi.sidney.springbootdemo.entity.User;
 
 import java.util.List;
 

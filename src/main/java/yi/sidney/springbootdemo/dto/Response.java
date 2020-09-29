@@ -1,4 +1,4 @@
-package yi.sidneyi.springbootdemo.dto;
+package yi.sidney.springbootdemo.dto;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;

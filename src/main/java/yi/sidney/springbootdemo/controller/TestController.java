@@ -1,11 +1,11 @@
-package yi.sidneyi.springbootdemo.controller;
+package yi.sidney.springbootdemo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import yi.sidneyi.springbootdemo.dto.Request;
-import yi.sidneyi.springbootdemo.dto.Response;
+import yi.sidney.springbootdemo.dto.Response;
+import yi.sidney.springbootdemo.dto.TestRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
@@ -14,7 +14,6 @@ import java.util.Map;
 @Log4j2
 @RestController
 public class TestController {
-
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     @ResponseBody
     public String test(HttpServletRequest request) {
@@ -45,7 +44,7 @@ public class TestController {
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     @ResponseBody
-    public Response test1(@Validated Request request) {
+    public Response test1(@Validated TestRequest request) {
         log.info(request.getTest());
         JSONObject data = new JSONObject();
         data.put("test", request.getTest());

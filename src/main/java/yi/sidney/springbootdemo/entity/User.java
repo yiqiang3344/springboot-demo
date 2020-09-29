@@ -1,15 +1,18 @@
-package yi.sidneyi.springbootdemo.entity;
+package yi.sidney.springbootdemo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "user")
 @Getter
 @Setter
+@Log4j2
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,11 +25,11 @@ public class User {
     private String mobile;
 
     @Column(name = "created_time", nullable = false)
-    private Timestamp created_time;
+    private String created_time;
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + "'" +
                 ", mobile='" + mobile + "'" +
@@ -35,5 +38,12 @@ public class User {
     }
 
     public User() {
+    }
+
+    public User(String name, String mobile) {
+        this.name = name;
+        this.mobile = mobile;
+        this.created_time = (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(Calendar.getInstance().getTime());
+        log.info("yjqtest:" + this.created_time);
     }
 }

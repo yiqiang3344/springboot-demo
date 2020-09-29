@@ -1,4 +1,4 @@
-package yi.sidneyi.springbootdemo.error;
+package yi.sidney.springbootdemo.error;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.validation.BindingResult;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import yi.sidneyi.springbootdemo.dto.Response;
+import yi.sidney.springbootdemo.dto.Response;
 
 import javax.servlet.http.HttpServletResponse;
 
