@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j2;
 import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import yi.sidney.springbootdemo.dto.AddUserRequest;
 import yi.sidney.springbootdemo.dto.Request;
 import yi.sidney.springbootdemo.dto.Response;
@@ -49,6 +47,17 @@ public class UserController {
         JSONArray jsonArr = JSONArray.fromObject(list);
         JSONObject data = new JSONObject();
         data.put("list", jsonArr);
+        return new Response().initSuccessRes(data);
+    }
+
+    @RequestMapping(value = "user/list/page/{page}/size/{page_size}", method = RequestMethod.GET)
+    @ResponseBody
+    public Response getUserListByPage(@PathVariable Integer page, @PathVariable Integer page_size) {
+        Page<User> users = userService.findAll(page - 1, page_size);
+        JSONObject data = new JSONObject();
+        data.put("pages", users.getTotalPages());
+        data.put("total", users.getTotalElements());
+        data.put("list", JSONArray.fromObject(users.getContent()));
         return new Response().initSuccessRes(data);
     }
 
