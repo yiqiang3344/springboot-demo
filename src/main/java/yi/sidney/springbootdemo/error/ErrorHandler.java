@@ -1,6 +1,7 @@
 package yi.sidney.springbootdemo.error;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -11,6 +12,7 @@ import yi.sidney.springbootdemo.dto.Response;
 
 import javax.servlet.http.HttpServletResponse;
 
+@Log4j2
 @ControllerAdvice
 public class ErrorHandler {
     @ResponseBody
