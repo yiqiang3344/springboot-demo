@@ -23,13 +23,17 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import yi.sidney.springbootdemo.utils.log.LogUtil;
 
 @Log4j2
 @Component
 public class HttpClientUtil {
+    @Autowired
+    private LogUtil logUtil;
 
-    public static String doGet(String url, Map<String, String> param, int timeout) throws IOException, URISyntaxException {
+    public String doGet(String url, Map<String, String> param, int timeout) throws IOException, URISyntaxException {
 
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -67,7 +71,7 @@ public class HttpClientUtil {
             requestLogMap.put("error", e.getLocalizedMessage());
             throw e;
         } finally {
-            log.info(JSONObject.fromObject(requestLogMap).toString());
+            logUtil.webclient(JSONObject.fromObject(requestLogMap).toString());
             try {
                 response.close();
             } catch (Exception e) {
@@ -77,17 +81,17 @@ public class HttpClientUtil {
         return resultString;
     }
 
-    public static String doGet(String url, Map<String, String> param) throws IOException, URISyntaxException {
+    public String doGet(String url, Map<String, String> param) throws IOException, URISyntaxException {
 
         return doGet(url, param, 5000);
     }
 
-    public static String doGet(String url) throws IOException, URISyntaxException {
+    public String doGet(String url) throws IOException, URISyntaxException {
 
         return doGet(url, null, 5000);
     }
 
-    public static String doPost(String url, Map<String, String> param, int timeout) throws IOException {
+    public String doPost(String url, Map<String, String> param, int timeout) throws IOException {
         // 创建Httpclient对象
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
@@ -120,7 +124,7 @@ public class HttpClientUtil {
             requestLogMap.put("error", e.getLocalizedMessage());
             throw e;
         } finally {
-            log.info(JSONObject.fromObject(requestLogMap).toString());
+            logUtil.webclient(JSONObject.fromObject(requestLogMap).toString());
             try {
                 response.close();
             } catch (Exception e) {
@@ -131,17 +135,17 @@ public class HttpClientUtil {
         return resultString;
     }
 
-    public static String doPost(String url, Map<String, String> param) throws IOException {
+    public String doPost(String url, Map<String, String> param) throws IOException {
 
         return doPost(url, param, 5000);
     }
 
-    public static String doPost(String url) throws IOException {
+    public String doPost(String url) throws IOException {
 
         return doPost(url, null, 5000);
     }
 
-    public static String doPostJson(String url, String json, int timeout) throws Exception {
+    public String doPostJson(String url, String json, int timeout) throws Exception {
         // 创建Httpclient对象
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
@@ -167,7 +171,7 @@ public class HttpClientUtil {
             requestLogMap.put("error", e.getLocalizedMessage());
             throw e;
         } finally {
-            log.info(JSONObject.fromObject(requestLogMap).toString());
+            logUtil.webclient(JSONObject.fromObject(requestLogMap).toString());
             try {
                 response.close();
             } catch (Exception e) {
@@ -178,7 +182,7 @@ public class HttpClientUtil {
         return resultString;
     }
 
-    public static String doPostJson(String url, String json) throws Exception {
+    public String doPostJson(String url, String json) throws Exception {
 
         return doPostJson(url, json, 5000);
     }
