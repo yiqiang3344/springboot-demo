@@ -37,6 +37,5 @@ public class Response {
             return jsonObject.fluentPut("data", new JSONObject());
         }
         return jsonObject;
-
     }
 }
