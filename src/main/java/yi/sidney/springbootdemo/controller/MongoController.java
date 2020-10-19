@@ -1,6 +1,7 @@
 package yi.sidney.springbootdemo.controller;
 
 import lombok.extern.log4j.Log4j2;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +24,18 @@ public class MongoController {
         mongoDemo.setName(request.getName());
         mongoDemo.setMobile(request.getMobile());
         mongoDemoService.saveDemo(mongoDemo);
-        return new Response().initSuccessRes(net.sf.json.JSONObject.fromObject(request));
+        return new Response().initSuccessRes(net.sf.json.JSONObject.fromObject(mongoDemo));
     }
 
     @RequestMapping(value = "/mongo/one", method = RequestMethod.GET)
     @ResponseBody
-    public Response list(@Validated MongoDemoGetRequest request) {
+    public Response one(@Validated MongoDemoGetRequest request) {
         return new Response().initSuccessRes(net.sf.json.JSONObject.fromObject(mongoDemoService.findDemoById(Long.valueOf(request.getId()))));
+    }
+
+    @RequestMapping(value = "/mongo/list", method = RequestMethod.GET)
+    @ResponseBody
+    public Response list() {
+        return new Response().initSuccessRes(JSONArray.fromObject(mongoDemoService.findAll()));
     }
 }

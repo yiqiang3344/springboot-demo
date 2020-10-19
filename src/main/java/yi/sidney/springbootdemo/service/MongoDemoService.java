@@ -9,6 +9,7 @@ import yi.sidney.springbootdemo.dao.MongoDemoDao;
 import yi.sidney.springbootdemo.entity.MongoDemo;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Component
 public class MongoDemoService implements MongoDemoDao {
@@ -40,5 +41,9 @@ public class MongoDemoService implements MongoDemoDao {
     public MongoDemo findDemoById(Long id) {
         Query query = new Query(Criteria.where("id").is(id));
         return mongoTemplate.findOne(query, MongoDemo.class);
+    }
+
+    public List<MongoDemo> findAll() {
+        return mongoTemplate.findAll(MongoDemo.class);
     }
 }
